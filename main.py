@@ -1,14 +1,14 @@
-def check_sequence(seq):
+def is_braces_sequence_correct(seq: str) -> bool:
     open_seq = {'(': ')', '[': ']', '{': '}'}
     close_seq = {')': '(', ']': '[', '}': '{'}
     if seq == '':
         return True
     if len(seq) % 2 == 1:
         return False
-    if seq[0] in close_seq:
-        return False
     stack = []
     for i in seq:
+        if i not in open_seq or i not in close_seq:
+            continue
         if i in open_seq:
             stack.append(i)
         elif i in close_seq and len(stack) == 0:
@@ -20,5 +20,10 @@ def check_sequence(seq):
     return len(stack) == 0
 
 
-sequence = input()
-print("YES" if check_sequence(sequence) else "NO")
+def main() -> None:
+    sequence = input()
+    print("YES" if is_braces_sequence_correct(sequence) else "NO")
+
+
+if __name__ == "__main__":
+    main()
